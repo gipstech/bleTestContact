@@ -3,7 +3,11 @@ package com.gipstech.bletestcontact;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -92,7 +96,7 @@ public class RssiListAdapter extends RecyclerView.Adapter<RssiListAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
+        layout.setOrientation(LinearLayout.VERTICAL);
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
 
         TextView tvName = new TextView(context);
@@ -101,6 +105,8 @@ public class RssiListAdapter extends RecyclerView.Adapter<RssiListAdapter.ViewHo
 
         TextView tvLevel = new TextView(context);
         tvLevel.setTypeface(Typeface.MONOSPACE);
+        tvLevel.setTextSize(20);
+        tvLevel.setPadding(10,0,0,30);
         defColors = tvLevel.getTextColors();
 
         layout.addView(tvName);
@@ -119,7 +125,7 @@ public class RssiListAdapter extends RecyclerView.Adapter<RssiListAdapter.ViewHo
 
         holder.tvName.setText(scan.uuid);
         holder.tvName.setBackgroundColor(0x00);
-        holder.tvLevel.setText(String.format(Locale.US, "%d %.1fm", scan.rssi, distance));
+        holder.tvLevel.setText(String.format(Locale.US, "RSSI=%ddBm dist=%.1fm", scan.rssi, distance));
 
         if (scan.rssi > RSSI_THRESHOLD)
         {

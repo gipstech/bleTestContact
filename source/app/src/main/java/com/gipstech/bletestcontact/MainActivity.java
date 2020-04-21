@@ -133,6 +133,15 @@ public class MainActivity extends AppCompatActivity
                 .setIncludeTxPowerLevel(false)
                 .build();
 
+        if (bleScanner == null)
+        {
+            textView.setText("Bluetooth scan not available.\nPlease activate bluetooth and restart the app.");
+        }
+        else if (bleAdvertiser == null)
+        {
+            textView.setText("Bluetooth advertising not available.\nPlease activate bluetooth and restart the app.");
+        }
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             // Ask the permission to the user
@@ -158,8 +167,15 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
 
-        bleScanner.startScan(scanFilters, scanSettings, myScanCallback);
-        bleAdvertiser.startAdvertising(advSettings, advData, myAdvertisingCallback);
+        if (bleScanner != null)
+        {
+            bleScanner.startScan(scanFilters, scanSettings, myScanCallback);
+        }
+
+        if (bleAdvertiser != null)
+        {
+            bleAdvertiser.startAdvertising(advSettings, advData, myAdvertisingCallback);
+        }
     }
 
     @Override
@@ -167,8 +183,15 @@ public class MainActivity extends AppCompatActivity
     {
         super.onPause();
 
-        bleScanner.stopScan(myScanCallback);
-        bleAdvertiser.stopAdvertising(myAdvertisingCallback);
+        if (bleScanner != null)
+        {
+            bleScanner.stopScan(myScanCallback);
+        }
+
+        if (bleAdvertiser != null)
+        {
+            bleAdvertiser.stopAdvertising(myAdvertisingCallback);
+        }
     }
 
     private ParcelUuid parcelUuidFromShortUUID(long serviceId)
