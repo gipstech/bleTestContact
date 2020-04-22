@@ -12,4 +12,5 @@ L'applicazione è utile per eseguire un test rapido con riferimento alla stima d
 La sottodirectory /source contiene il codice sorgente che può essere utilizzato per compilare la app usando Android Studio
 La sottodirectory /apk contiene invece un APK compilato usando lo stesso sorgente e che può essere usato per installare l'app direttamente sullo smartphone.
 
-
+Maggiori informazioni sul motivo per il quale questa app è stata creata sono disponibili qui: 
+http://www.gipstech.com/2020/04/21/bluetooth_only_app_can_help_for_containing_codiv19_spread/
